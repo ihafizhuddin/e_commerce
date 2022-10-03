@@ -1,3 +1,4 @@
+import 'package:e_commerce/ui/catalog/index.dart';
 import 'package:flutter/material.dart';
 import 'ui/shopping_cart/index.dart';
 
@@ -17,7 +18,7 @@ class StoreApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const ShoppingCartPage(),
+      home: const CatalogPage(),
     );
   }
 }

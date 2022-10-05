@@ -1,4 +1,5 @@
 import 'package:e_commerce/model/product.dart';
+import 'package:e_commerce/ui/product_detail/index.dart';
 import 'package:flutter/material.dart';
 
 class CatalogPage extends StatelessWidget {
@@ -60,7 +61,17 @@ class CatalogProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, '/product_detail', arguments: product);
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (BuildContext context) {
+          //       return ProductDetailPage(product: product);
+          //     },
+          //   ),
+          // );
+        },
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [

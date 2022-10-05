@@ -1,4 +1,5 @@
 import 'package:e_commerce/model/product.dart';
+import 'package:e_commerce/ui/shopping_cart/index.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -11,7 +12,9 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(Icons.arrow_back),
           tooltip: 'Back',
         ),
@@ -69,7 +72,9 @@ class ProductDetailPage extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints.expand(),
           child: TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/shopping_cart');
+            },
             icon: const Icon(Icons.shopping_cart_outlined),
             label: const Text('Add to Cart'),
             style: TextButton.styleFrom(

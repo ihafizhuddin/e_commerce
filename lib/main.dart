@@ -1,17 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:e_commerce/model/product.dart';
 import 'package:e_commerce/ui/catalog/index.dart';
 import 'package:e_commerce/ui/product_detail/index.dart';
-import 'package:flutter/material.dart';
+import 'model/cart.dart';
 import 'ui/shopping_cart/index.dart';
 
 void main() {
-  //Jalankan StoreApp
-  runApp(const StoreApp());
+  //Jalankan MyApp
+  runApp(ChangeNotifierProvider(
+    create: (context) => Cart(),
+    child: const MyApp(),
+  ));
 }
 
 //Widget utama
-class StoreApp extends StatelessWidget {
-  const StoreApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

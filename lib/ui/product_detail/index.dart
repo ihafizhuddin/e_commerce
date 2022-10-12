@@ -1,6 +1,9 @@
 import 'package:e_commerce/model/product.dart';
 import 'package:e_commerce/ui/shopping_cart/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../model/cart.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({Key? key, required this.product}) : super(key: key);
@@ -73,6 +76,7 @@ class ProductDetailPage extends StatelessWidget {
           constraints: const BoxConstraints.expand(),
           child: TextButton.icon(
             onPressed: () {
+              Provider.of<Cart>(context, listen: false).addToCart(product);
               Navigator.pushNamed(context, '/shopping_cart');
             },
             icon: const Icon(Icons.shopping_cart_outlined),

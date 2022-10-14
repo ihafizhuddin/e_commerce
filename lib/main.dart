@@ -1,3 +1,8 @@
+import 'package:e_commerce/firebase_options.dart';
+import 'package:e_commerce/model/order.dart';
+import 'package:e_commerce/ui/checkout/index.dart';
+import 'package:e_commerce/ui/checkout/proccess_checkout.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +12,9 @@ import 'package:e_commerce/ui/product_detail/index.dart';
 import 'model/cart.dart';
 import 'ui/shopping_cart/index.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //Jalankan MyApp
   runApp(ChangeNotifierProvider(
     create: (context) => Cart(),
@@ -32,6 +39,9 @@ class MyApp extends StatelessWidget {
           '/shopping_cart': (context) => const ShoppingCartPage(),
           '/product_detail': (context) => ProductDetailPage(
               product: ModalRoute.of(context)?.settings.arguments as Product),
+          '/checkout': (context) => const CheckoutPage(),
+          '/process_checkout': (context) => ProcessCheckoutPage(
+              order: ModalRoute.of(context)?.settings.arguments as Order),
         });
   }
 }

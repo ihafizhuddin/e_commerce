@@ -46,11 +46,36 @@ class CatalogPage extends StatelessWidget {
           )
         ],
       ),
-      body: ListView.builder(
-          itemCount: products.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CatalogProductCard(product: products[index]);
-          }),
+      body: FutureBuilder(
+        future: getProductsFromFirebase(),
+        builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                'An Error has occured: \n${snapshot.error}',
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
+          if (snapshot.hasData) {
+            List<Product> products = snapshot.data!;
+            return ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CatalogProductCard(product: products[index]);
+                });
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+      //Changed because using firebase, not using offline data dummy
+      // ListView.builder(
+      //     itemCount: products.length,
+      //     itemBuilder: (BuildContext context, int index) {
+      //       return CatalogProductCard(product: products[index]);
+      //     }),
     );
   }
 }
@@ -78,10 +103,14 @@ class CatalogProductCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Image.asset(
+            Image.network(
               product.image,
               fit: BoxFit.cover,
             ),
+            // Image.asset(
+            //   product.image,
+            //   fit: BoxFit.cover,
+            // ),
             Container(
               padding: const EdgeInsets.all(10),
               child: Column(

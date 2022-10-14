@@ -1,4 +1,21 @@
 // import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+Future<List<Product>> getProductsFromFirebase() async {
+  return FirebaseFirestore.instance
+      .collection('products')
+      .get()
+      .then((QuerySnapshot q) {
+    return List<Product>.generate(q.docs.length, (index) {
+      DocumentSnapshot doc = q.docs[index];
+      return Product(
+          id: doc.id,
+          name: doc['name'] as String,
+          price: doc['price'] as int,
+          image: doc['image'] as String);
+    });
+  });
+}
 
 class Product {
   Product(

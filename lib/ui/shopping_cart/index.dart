@@ -79,12 +79,18 @@ class ShoppingCartPage extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text(cart.items[index].product.name),
-                      leading: Image.asset(
+                      leading: Image.network(
                         cart.items[index].product.image,
                         height: 56.0,
                         width: 56.0,
                         fit: BoxFit.cover,
                       ),
+                      // leading: Image.asset(
+                      //   cart.items[index].product.image,
+                      //   height: 56.0,
+                      //   width: 56.0,
+                      //   fit: BoxFit.cover,
+                      // ),
                       subtitle: Text(
                         'Rp${cart.items[index].product.price}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -246,7 +252,11 @@ class ShoppingCartTotal extends StatelessWidget {
                       ? Colors.tealAccent.shade700
                       : Colors.grey.shade400,
                 ),
-                onPressed: cart.items.isNotEmpty ? () {} : null,
+                onPressed: cart.items.isNotEmpty
+                    ? () {
+                        Navigator.pushNamed(context, '/checkout');
+                      }
+                    : null,
               ),
             ),
           );

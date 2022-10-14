@@ -25,11 +25,16 @@ class ProductDetailPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          Image.asset(
+          Image.network(
             product.image,
             height: 300,
             fit: BoxFit.cover,
           ),
+          // Image.asset(
+          //   product.image,
+          //   height: 300,
+          //   fit: BoxFit.cover,
+          // ),
           ListTile(
             title: Text(
               'RP${product.price}',

@@ -43,7 +43,7 @@ class ProcessCheckoutPage extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.popUntil(context, ((route) => route.isFirst));
-                    Provider.of<Cart>(context).clearCart();
+                    Provider.of<Cart>(context, listen: false).clearCart();
                   },
                 )
               ],
